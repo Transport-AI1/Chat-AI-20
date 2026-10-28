@@ -1,13 +1,13 @@
-# Chat sin filtros
+# Transport AI Chat
 
-Cliente de chat de IA en Next.js 15 con streaming, modelos uncensored, subida de imágenes, markdown con resaltado de código e historial local.
+Asistente de inteligencia artificial en Next.js con respuestas en streaming, adjuntos de imágenes, generación de imágenes, markdown y conversaciones guardadas localmente.
 
 ## Requisitos
 
 - Node.js 20+
-- Una API key de [Venice.ai](https://venice.ai/settings/api) (endpoint compatible con OpenAI)
+- Una clave API de un proveedor de IA compatible con la API de chat de OpenAI
 
-## Instalación
+## Configuración\n\nDefine `API_KEY` y `API_BASE_URL` en las variables de entorno del proyecto. El proveedor configurado procesa las solicitudes de texto e imágenes.\n\n## Instalación
 
 ```bash
 npm install
