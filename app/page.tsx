@@ -374,10 +374,10 @@ export default function Home() {
           {!active || active.messages.length === 0 ? (
             <div className="mx-auto flex h-full max-w-2xl flex-col justify-center px-6 text-center">
               <h1 className="text-2xl font-semibold tracking-tight text-zinc-100">
-                Pregunta lo que sea
+                ¿En qué te puedo ayudar?
               </h1>
               <p className="mt-2 text-sm text-zinc-500">
-                Sin filtros, sin advertencias. Modelos uncensored, streaming, imágenes y código.
+                Tu asistente de IA para escribir, aprender, programar, analizar ideas y crear imágenes.
               </p>
               <div className="mt-6 grid gap-2 text-left sm:grid-cols-2">
                 {[
