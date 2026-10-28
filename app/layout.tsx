@@ -6,8 +6,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Chat sin filtros",
-  description: "Cliente de chat de IA sin filtros, streaming y modelos uncensored.",
+  title: "Transport AI Chat",
+  description: "Tu asistente de inteligencia artificial para aprender, crear, programar y trabajar."
 };
 
 export const viewport: Viewport = {
