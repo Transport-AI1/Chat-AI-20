@@ -4,7 +4,7 @@ const BASE = (process.env.API_BASE_URL || "https://api.venice.ai/api/v1").replac
 const KEY = process.env.API_KEY || process.env.VENICE_API_KEY || "";
 
 const FALLBACK = [
-  { id: "venice-uncensored", name: "Venice Uncensored", description: "Sin filtros, todo terreno." },
+  { id: "llama-3.3-70b", name: "Asistente general", description: "Ayuda para tareas, ideas y redacción." },
   { id: "llama-3.3-70b", name: "Llama 3.3 70B", description: "Razonamiento y redacción." },
   { id: "qwen3-235b-a22b", name: "Qwen3 235B", description: "Contexto largo y código." },
   { id: "deepseek-v3.1", name: "DeepSeek V3.1", description: "Código y análisis." },
