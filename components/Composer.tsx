@@ -5,7 +5,7 @@ import type { Attachment } from "@/lib/types";
 import { uid } from "@/lib/uid";
 
 interface Props {
-  onSend: (text: string, attachments: Attachment[]) => void;
+  onSend: (text: string, attachments: Attachment[], mode?: "chat" | "image") => void;
   onStop: () => void;
   streaming: boolean;
   disabled: boolean;
@@ -17,6 +17,7 @@ export default function Composer({ onSend, onStop, streaming, disabled }: Props)
   const [text, setText] = useState("");
   const [files, setFiles] = useState<Attachment[]>([]);
   const [dragging, setDragging] = useState(false);
+  const [mode, setMode] = useState<"chat" | "image">("chat");
   const ref = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -47,7 +48,7 @@ export default function Composer({ onSend, onStop, streaming, disabled }: Props)
     const trimmed = text.trim();
     if (streaming || disabled) return;
     if (!trimmed && files.length === 0) return;
-    onSend(trimmed, files);
+    onSend(trimmed, files, mode);
     setText("");
     setFiles([]);
   }
@@ -99,6 +100,14 @@ export default function Composer({ onSend, onStop, streaming, disabled }: Props)
         <div className="flex items-end gap-1">
           <button
             type="button"
+            onClick={() => setMode((current) => current === "chat" ? "image" : "chat")}
+            title={mode === "image" ? "Cambiar a chat" : "Generar imagen"}
+            className={`mb-0.5 shrink-0 rounded-lg border px-2 py-2 text-[11px] transition ${mode === "image" ? "border-violet-500/50 bg-violet-500/10 text-violet-300" : "border-white/10 text-zinc-400 hover:text-zinc-100"}`}
+          >
+            {mode === "image" ? "▧ Imagen" : "＋ Imagen"}
+          </button>
+          <button
+            type="button"
             onClick={() => fileRef.current?.click()}
             title="Adjuntar imagen"
             className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-zinc-400 hover:bg-white/5 hover:text-zinc-100"
@@ -124,7 +133,7 @@ export default function Composer({ onSend, onStop, streaming, disabled }: Props)
             disabled={disabled}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={onKeyDown}
-            placeholder={disabled ? "Configura tu API_KEY para empezar…" : "Escribe lo que quieras…"}
+            placeholder={disabled ? "Configura tu API_KEY para empezar…" : mode === "image" ? "Describe la imagen que quieres crear…" : "Escribe lo que quieras…"}
             className="max-h-64 min-h-9 flex-1 resize-none bg-transparent px-1 py-2 text-sm text-zinc-100 outline-none placeholder:text-zinc-600"
           />
 
@@ -151,7 +160,7 @@ export default function Composer({ onSend, onStop, streaming, disabled }: Props)
         </div>
       </div>
       <p className="mx-auto mt-2 max-w-3xl text-center text-[11px] text-zinc-600">
-        Enter envía · Shift+Enter salto de línea · Puedes arrastrar imágenes
+        Enter envía · Shift+Enter salto de línea · {mode === "image" ? "Modo de generación de imágenes" : "Puedes adjuntar imágenes"}
       </p>
     </div>
   );
