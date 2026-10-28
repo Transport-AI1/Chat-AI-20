@@ -12,6 +12,7 @@ export interface Message {
   role: Role;
   content: string;
   attachments?: Attachment[];
+  imageUrl?: string;
   createdAt: number;
   error?: boolean;
 }
