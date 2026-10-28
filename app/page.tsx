@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Attachment, Conversation, Message, Settings } from "@/lib/types";
+import Link from "next/link";
 import { DEFAULT_SETTINGS, loadState, saveState } from "@/lib/storage";
 import { uid } from "@/lib/uid";
 import Composer from "@/components/Composer";
@@ -334,6 +335,7 @@ export default function Home() {
           />
 
           <div className="ml-auto flex items-center gap-2 text-xs">
+            <Link href="/planes" className="rounded-lg border border-white/10 px-2 py-1.5 text-zinc-400 hover:text-zinc-200">Planes</Link>
             <button
               type="button"
               onClick={() => setShowSettings((v) => !v)}
