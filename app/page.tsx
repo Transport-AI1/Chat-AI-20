@@ -199,7 +199,7 @@ export default function Home() {
     [patchConversation, settings],
   );
 
-  function send(text: string, attachments: Attachment[]) {
+  function send(text: string, attachments: Attachment[], mode: "chat" | "image" = "chat") {
     if (!active) return;
     const message: Message = {
       id: uid(),
@@ -219,7 +219,54 @@ export default function Home() {
     }));
 
     scrollLock.current = true;
+    if (mode === "image") {
+      void generateImage(active.id, text);
+      return;
+    }
     void stream(active.id, history, settings.model);
+  }
+
+  async function generateImage(conversationId: string, prompt: string) {
+    if (!prompt.trim() || streaming) return;
+    const assistantId = uid();
+    setStreaming(true);
+    patchConversation(conversationId, (c) => ({
+      ...c,
+      messages: [...c.messages, {
+        id: assistantId,
+        role: "assistant",
+        content: "Generando imagen…",
+        createdAt: Date.now(),
+      }],
+      updatedAt: Date.now(),
+    }));
+    try {
+      const response = await fetch("/api/images", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: prompt.trim(), size: "1024x1024" }),
+      });
+      const result = await response.json() as { imageUrl?: string; error?: string };
+      if (!response.ok || !result.imageUrl) {
+        throw new Error(result.error || "No se pudo generar la imagen.");
+      }
+      patchConversation(conversationId, (c) => ({
+        ...c,
+        messages: c.messages.map((m) => m.id === assistantId
+          ? { ...m, content: "Aquí tienes la imagen que has pedido.", imageUrl: result.imageUrl }
+          : m),
+        updatedAt: Date.now(),
+      }));
+    } catch (err) {
+      patchConversation(conversationId, (c) => ({
+        ...c,
+        messages: c.messages.map((m) => m.id === assistantId
+          ? { ...m, content: (err as Error).message || "Error al generar la imagen.", error: true }
+          : m),
+      }));
+    } finally {
+      setStreaming(false);
+    }
   }
 
   function regenerate() {
