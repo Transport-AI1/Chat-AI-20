@@ -48,6 +48,16 @@ function MessageView({ message, streaming, isLast, onRegenerate, onDelete }: Pro
           <div className="caret text-zinc-500" />
         ) : null}
 
+        {message.imageUrl ? (
+          <div className="mt-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={message.imageUrl} alt="Imagen generada por IA" className="max-h-[640px] w-auto max-w-full rounded-2xl border border-white/10 object-contain" />
+            <a href={message.imageUrl} target="_blank" rel="noreferrer" className="mt-2 inline-flex rounded-lg border border-white/10 px-3 py-2 text-xs text-zinc-300 hover:bg-white/5">
+              Abrir imagen
+            </a>
+          </div>
+        ) : null}
+
         {message.error ? (
           <p className="mt-2 rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-300">
             {message.content}
