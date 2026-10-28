@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
   if (!upstream.ok) {
     const detail = typeof data.error === "string" ? data.error : data.error?.message;
     const message = upstream.status === 402
-      ? "Venice no tiene saldo USD o DIEM suficiente para generar la imagen. Añade crédito en https://venice.ai/settings/api."
+      ? "El servicio de IA no tiene saldo suficiente para generar la imagen. Revisa la configuración de facturación del proveedor."
       : detail || `El proveedor ha devuelto el error ${upstream.status}.`;
     return Response.json({ error: message }, { status: upstream.status });
   }
