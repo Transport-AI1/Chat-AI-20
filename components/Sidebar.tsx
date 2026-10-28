@@ -39,7 +39,7 @@ export default function Sidebar({
         }`}
       >
         <div className="flex items-center justify-between p-3">
-          <span className="text-sm font-semibold tracking-tight text-zinc-100">Chat sin filtros</span>
+          <span className="text-sm font-semibold tracking-tight text-zinc-100">Transport AI Chat</span>
           <button
             type="button"
             onClick={onClose}
