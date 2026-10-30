@@ -3,9 +3,26 @@
 @tailwind utilities;
 
 :root { color-scheme: dark; }
-body { background: #0a0b0f; }
+* { scrollbar-width: thin; scrollbar-color: #343746 transparent; }
+html, body { min-height: 100%; }
+body {
+  background: #090a0f;
+  color: #f4f4f5;
+  background-image: radial-gradient(ellipse at 50% -25%, rgba(124,92,255,.16), transparent 48%);
+}
+button, select, textarea { outline-offset: 3px; }
+::selection { background: rgba(124,92,255,.35); }
 
-.btn { @apply rounded-lg px-4 py-2 text-sm font-medium transition active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40; }
-.bub pre { @apply overflow-auto rounded-lg border border-white/10 bg-black/60 p-3 text-xs; }
-.bub code { @apply rounded bg-black/60 px-1 py-0.5 font-mono text-xs; }
-.bub pre code { @apply bg-transparent p-0; }
+.btn { @apply rounded-xl px-4 py-2 text-sm font-medium transition duration-200 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40; }
+.bub pre { @apply my-3 overflow-auto rounded-xl border border-white/10 bg-black/50 p-4 text-xs; }
+.bub code { @apply rounded bg-black/40 px-1 py-0.5 font-mono text-xs text-violet-200; }
+.bub pre code { @apply bg-transparent p-0 text-zinc-200; }
+.bub h1,.bub h2,.bub h3 { @apply mb-2 mt-4 font-semibold tracking-tight text-zinc-100; }
+.bub h2 { @apply text-lg; }
+.bub h3 { @apply text-base; }
+.bub p { @apply my-2; }
+.bub ul,.bub ol { @apply my-2 ml-5 space-y-1; }
+.bub ul { @apply list-disc; }
+.bub ol { @apply list-decimal; }
+.bub a { @apply text-violet-300 underline underline-offset-2; }
+.glass { background: rgba(20,21,31,.76); backdrop-filter: blur(18px); }
