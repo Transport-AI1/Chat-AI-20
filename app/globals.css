@@ -9,4 +9,3 @@ body { background: #0a0b0f; }
 .bub pre { @apply overflow-auto rounded-lg border border-white/10 bg-black/60 p-3 text-xs; }
 .bub code { @apply rounded bg-black/60 px-1 py-0.5 font-mono text-xs; }
 .bub pre code { @apply bg-transparent p-0; }
-</style>
