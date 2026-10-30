@@ -58,7 +58,7 @@ export function ChatView({ model, onLimit }: { model: string; onLimit: (t: strin
 
     const command = clean.match(/^\/([a-záéíóú]+)\s*$/i);
     if (command) {
-      const key = command[1].toLowerCase();
+      const key = (command[1] ?? "").toLowerCase();
       if (ROLES[key]) {
         setRole(key);
         setDraft("");
