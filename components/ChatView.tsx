@@ -116,10 +116,10 @@ export function ChatView({ model, onLimit }: { model: string; onLimit: (t: strin
 
         {hasMessages && (
           <div className="mb-5 flex items-center gap-3 rounded-xl border border-white/[.06] bg-white/[.025] px-4 py-3">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-violet-500/15 text-violet-200">{role ? ROLES[role].icon : "✳"}</span>
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-violet-500/15 text-violet-200">{role ? ROLES[role]?.icon ?? "✳" : "✳"}</span>
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-medium text-zinc-200">{role ? `Modo ${ROLES[role].name}` : "Modo general"}</p>
-              <p className="truncate text-[10px] text-zinc-500">{role ? ROLES[role].description : "Asistente general de Chat 20 AI"}</p>
+              <p className="text-xs font-medium text-zinc-200">{role ? `Modo ${ROLES[role]?.name ?? role}` : "Modo general"}</p>
+              <p className="truncate text-[10px] text-zinc-500">{role ? ROLES[role]?.description ?? "Modo profesional" : "Asistente general de Chat 20 AI"}</p>
             </div>
             {role && <button onClick={() => setRole(null)} className="text-[10px] text-zinc-500 hover:text-white">Cambiar</button>}
           </div>
